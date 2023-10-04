@@ -1,0 +1,1499 @@
+{
+	"info": {
+		"_postman_id": "12b46550-97f8-43c6-b7db-df1cbee4aa53",
+		"name": "Payments API",
+		"description": "Welcome to Shiprocket's API Documentation. We've designed this document to help developers and Shiprocket users fully understand and integrate our API for a seamless and easy deployment. These APIs enable you to utilize most of your Shiprocket account's panel features fully.\n\nWe've listed all the APIs, their required parameters, and their example requests and responses on the right for easy understanding. The easiest way to start using the Shiprocket APIs is by clicking the **Run in Postman** button above. The [Postman](https://www.getpostman.com/) is a free tool that helps developers run and debug API requests.\n\nOur APIs are based around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) architecture and use the basic [HTTP](https://www.tutorialspoint.com/http/http_status_codes) request methods. Our APIs accept [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - encoded body requests and return data in the same form.\n\nRead through the following sections for the integration process.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29581192"
+	},
+	"item": [
+		{
+			"name": "Cart And Payment",
+			"item": [
+				{
+					"name": "Payment (Server-Side)",
+					"item": [
+						{
+							"name": "Create Payment Token For Purchase",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{api_key}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{merchant_id}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"user\": {\n    \"id\": {\n      \"value\": \"user-id\"\n    }\n  },\n  \"purchase\": {\n    \"items\": [\n      {\n        \"sku\": \"SKU001\",\n        \"quantity\": 1\n      }\n    ]\n  },\n  \"sandbox\": true\n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/admin/payment/token",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"admin",
+										"payment",
+										"token"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"user\": {\n    \"id\": {\n      \"value\": \"user-id\"\n    }\n  },\n  \"purchase\": {\n    \"items\": [\n      {\n        \"sku\": \"SKU001\",\n        \"quantity\": 1\n      }\n    ]\n  },\n  \"sandbox\": true\n}\n"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v2/project/{{project_id}}/admin/payment/token",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"admin",
+												"payment",
+												"token"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 04 Oct 2023 03:16:36 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"token\": \"zjq35G4pjz5huEYxmvixzbDErrR6X4uv_lc_en_bg_FFFFFF_tb_3D46F5\",\n    \"order_id\": 56955213\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{bearer_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Virtual Items And Currency",
+			"item": [
+				{
+					"name": "Catalog",
+					"item": [
+						{
+							"name": "Get Virtual Item List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_items",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_items"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"description": "(Optional, Integer) Sets the maximum number of items to show on one page.",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"description": "(Optional, Integer) Number of the element from which the list is generated (the count starts from 0).",
+											"disabled": true
+										},
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										},
+										{
+											"key": "currency",
+											"value": "",
+											"description": "(Optional, String) The currency of the prices being requested.",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Retrieve list of virtual items in the store for a specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "2",
+													"description": "//Optional. The number of items to return per page.",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "0",
+													"description": "//Optional. The offset for pagination.",
+													"disabled": true
+												},
+												{
+													"key": "locale",
+													"value": "en_US",
+													"description": "//Optional. The locale in the format language_TERRITORY.",
+													"disabled": true
+												},
+												{
+													"key": "country",
+													"value": "MY",
+													"description": "//Optional. The country in the format TERRITORY.",
+													"disabled": true
+												},
+												{
+													"key": "currency",
+													"value": "MYR",
+													"description": "//Optional. The currency of the prices being requested.",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 03:24:52 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"has_more\": false,\n    \"items\": [\n        {\n            \"item_id\": 522592,\n            \"sku\": \"12345\",\n            \"type\": \"virtual_good\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"image_url\": \"https://static.xsolla.com/misc/publisher_account/virtual_item_default_image.png\",\n            \"price\": {\n                \"amount\": \"1.00\",\n                \"amount_without_discount\": \"1.00\",\n                \"currency\": \"USD\"\n            },\n            \"virtual_prices\": [],\n            \"can_be_bought\": true,\n            \"promotions\": [],\n            \"limits\": null,\n            \"periods\": [],\n            \"attributes\": [],\n            \"is_free\": false,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ],\n            \"virtual_item_type\": \"consumable\",\n            \"vp_rewards\": [],\n            \"inventory_options\": {\n                \"consumable\": {\n                    \"usages_count\": 1\n                },\n                \"expiration_period\": null\n            }\n        },\n        {\n            \"item_id\": 522636,\n            \"sku\": \"SKU001\",\n            \"type\": \"virtual_good\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"image_url\": \"https://static.xsolla.com/misc/publisher_account/virtual_item_default_image.png\",\n            \"price\": {\n                \"amount\": \"10.00\",\n                \"amount_without_discount\": \"10.00\",\n                \"currency\": \"USD\"\n            },\n            \"virtual_prices\": [],\n            \"can_be_bought\": true,\n            \"promotions\": [],\n            \"limits\": null,\n            \"periods\": [],\n            \"attributes\": [],\n            \"is_free\": false,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ],\n            \"virtual_item_type\": \"consumable\",\n            \"vp_rewards\": [],\n            \"inventory_options\": {\n                \"consumable\": {\n                    \"usages_count\": 1\n                },\n                \"expiration_period\": null\n            }\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Virtual Item By SKU",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_items/sku/:item_sku",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_items",
+										"sku",
+										":item_sku"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "item_sku",
+											"value": "12345",
+											"description": "(Required, Integer) The SKU ID of the virtual item."
+										}
+									]
+								},
+								"description": "Retrieve details of a specific virtual item in the store using its SKU ID."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/sku/:item_sku",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"sku",
+												":item_sku"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "country",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "item_sku",
+													"value": "12345",
+													"description": "(Required, Integer) The SKU ID of the virtual item."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:34:45 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"item_id\": 522592,\n    \"sku\": \"12345\",\n    \"type\": \"virtual_good\",\n    \"name\": \"Item 1\",\n    \"description\": null,\n    \"image_url\": \"https://static.xsolla.com/misc/publisher_account/virtual_item_default_image.png\",\n    \"price\": {\n        \"amount\": \"1.00\",\n        \"amount_without_discount\": \"1.00\",\n        \"currency\": \"USD\"\n    },\n    \"virtual_prices\": [],\n    \"can_be_bought\": true,\n    \"promotions\": [],\n    \"limits\": null,\n    \"periods\": [],\n    \"attributes\": [],\n    \"is_free\": false,\n    \"groups\": [\n        {\n            \"external_id\": \"1\",\n            \"name\": \"Group 1\"\n        }\n    ],\n    \"virtual_item_type\": \"consumable\",\n    \"vp_rewards\": [],\n    \"inventory_options\": {\n        \"consumable\": {\n            \"usages_count\": 1\n        },\n        \"expiration_period\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get All Virtual Items List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_items/all",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_items",
+										"all"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "promo_code",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Retrieve a complete list of all virtual items available in the store for a specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Virtual Currency List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_currency",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_currency"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"description": "(Optional, Integer) Sets the maximum number of items to show on one page.",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+											"disabled": true
+										},
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										},
+										{
+											"key": "promo_code",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.",
+											"disabled": true
+										},
+										{
+											"key": "additional_fields[]",
+											"value": "",
+											"description": "(Optional, Array, String): List of extra fields like \"media_list\", \"order\", \"long_description\", or \"custom_attributes\" to be included in the response.",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Retrieve virtual currencies list available in the store for a specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Virtual Currency By SKU",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_currency/sku/:virtual_currency_sku",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_currency",
+										"sku",
+										":virtual_currency_sku"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "virtual_currency_sku",
+											"value": "1122",
+											"description": "(Required, String) SKU ID of the virtual currency."
+										}
+									]
+								},
+								"description": "Retrieve detailed information about a specific virtual currency in the store using its SKU ID."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Virtual Currency Package List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_currency/package",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_currency",
+										"package"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"description": "(Optional, Integer) Sets the maximum number of items to show on one page.",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+											"disabled": true
+										},
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										},
+										{
+											"key": "promo_code",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.",
+											"disabled": true
+										},
+										{
+											"key": "additional_fields[]",
+											"value": "",
+											"description": "(Optional, Array, String): List of extra fields like \"media_list\", \"order\", \"long_description\", or \"custom_attributes\" to be included in the response.",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Retrieve detailed information about list of virtual currency package available in the store for specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Virtual Currency Package List By SKU",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_currency/package/sku/:virtual_currency_package_sku",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_currency",
+										"package",
+										"sku",
+										":virtual_currency_package_sku"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "virtual_currency_package_sku",
+											"value": "123456",
+											"description": "(Required, String) SKU ID of the virtual currency package."
+										}
+									]
+								},
+								"description": "Retrieve detailed information about a specific virtual currency package in the store using its SKU ID."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Items List By Specified Group",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/virtual_items/group/:external_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"virtual_items",
+										"group",
+										":external_id"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"description": "(Optional, Integer) Sets the maximum number of items to show on one page.",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+											"disabled": true
+										},
+										{
+											"key": "locale",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+											"disabled": true
+										},
+										{
+											"key": "country",
+											"value": "",
+											"description": "(Optional, String) The two-letter code that sets the country for prices and rules. If not given, the project's default country is used.",
+											"disabled": true
+										},
+										{
+											"key": "promo_code",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.",
+											"disabled": true
+										},
+										{
+											"key": "additional_fields[]",
+											"value": "",
+											"description": "(Optional, Array, String): List of extra fields like \"media_list\", \"order\", \"long_description\", or \"custom_attributes\" to be included in the response.",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "external_id",
+											"value": "1",
+											"description": "(Required, String) ID of the group."
+										}
+									]
+								},
+								"description": "Retrieve infomation about an items list from a group in the store from specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Items Groups List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v2/project/{{project_id}}/items/groups",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"project",
+										"{{project_id}}",
+										"items",
+										"groups"
+									],
+									"query": [
+										{
+											"key": "promo_code",
+											"value": "",
+											"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Retrieve information about all virtual items group available in the store for a specific project."
+							},
+							"response": [
+								{
+									"name": "Successful Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items/virtual_items/all",
+											"protocol": "https",
+											"host": [
+												"store",
+												"xsolla",
+												"com"
+											],
+											"path": [
+												"api",
+												"v2",
+												"project",
+												"{{project_id}}",
+												"items",
+												"virtual_items",
+												"all"
+											],
+											"query": [
+												{
+													"key": "locale",
+													"value": "",
+													"description": "(Optional, String) The two-letter code that sets the response language (like 'en' for English). If not given, the project's default language is used.",
+													"disabled": true
+												},
+												{
+													"key": "promo_code",
+													"value": "",
+													"description": "(Optional, String): A unique, case-sensitive code that consists of 1 to 128 letters or numbers.\n\n",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 02 Oct 2023 04:39:59 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, x-unauthorized-id,x-user,x-xsolla-product-tag"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"items\": [\n        {\n            \"sku\": \"12345\",\n            \"name\": \"Item 1\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        },\n        {\n            \"sku\": \"SKU001\",\n            \"name\": \"SKU001 Item\",\n            \"description\": null,\n            \"groups\": [\n                {\n                    \"external_id\": \"1\",\n                    \"name\": \"Group 1\"\n                }\n            ]\n        }\n    ]\n}"
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{bearer_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
