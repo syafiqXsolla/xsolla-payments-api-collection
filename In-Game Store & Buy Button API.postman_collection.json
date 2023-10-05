@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "12b46550-97f8-43c6-b7db-df1cbee4aa53",
-		"name": "Payments API",
-		"description": "Welcome to Shiprocket's API Documentation. We've designed this document to help developers and Shiprocket users fully understand and integrate our API for a seamless and easy deployment. These APIs enable you to utilize most of your Shiprocket account's panel features fully.\n\nWe've listed all the APIs, their required parameters, and their example requests and responses on the right for easy understanding. The easiest way to start using the Shiprocket APIs is by clicking the **Run in Postman** button above. The [Postman](https://www.getpostman.com/) is a free tool that helps developers run and debug API requests.\n\nOur APIs are based around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) architecture and use the basic [HTTP](https://www.tutorialspoint.com/http/http_status_codes) request methods. Our APIs accept [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - encoded body requests and return data in the same form.\n\nRead through the following sections for the integration process.",
+		"name": "In-Game Store & Buy Button API",
+		"description": "[https://developers.xsolla.com/api/igs-bb/overview/](https://developers.xsolla.com/api/igs-bb/overview/)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29581192"
 	},
